@@ -22,18 +22,24 @@
 				.catch(error => console.error(error));
 		}
 
-		fetch('https://defiminds-cors-proxy.glitch.me/https://defiminds-cors-proxy.glitch.me/list-symbols')
-			.then(response => response.json())
-			.then(data => {
-				const select = document.getElementById('symbol-select');
-				data.forEach(symbol => {
-					const option = document.createElement('option');
-					option.value = symbol;
-					option.text = symbol;
-					select.add(option);
-				});
-			})
-			.catch(error => console.error(error));
+function popularSelect() {
+  const url = 'https://defiminds-cors-proxy.glitch.me/list-symbols';
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const select = document.getElementById('symbol-select');
+
+      data.forEach(symbol => {
+        const option = document.createElement('option');
+        option.value = symbol;
+        option.text = symbol;
+        select.add(option);
+      });
+    })
+    .catch(error => console.error(error));
+}
+
 	</script>
 </body>
 </html>
