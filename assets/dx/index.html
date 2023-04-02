@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exemplo CORS Anywhere</title>
+</head>
+<body>
+	<select id="symbol-select">
+		<option value="BNB_BTC">BNB/BTC</option>
+		<option value="BNB_ETH">BNB/ETH</option>
+		<option value="BTC_USDSB-1AC">BTC/USDSB-1AC</option>
+		<option value="ETH_BTC">ETH/BTC</option>
+		<option value="ETH_USDSB-1AC">ETH/USDSB-1AC</option>
+	</select>
+	<button onclick="buscarPreco()">Buscar Preço</button>
+	<p id="preco"></p>
+
+	<script>
+		function buscarPreco() {
+			const symbol = document.getElementById('symbol-select').value;
+			const url = 'https://cors-anywhere.herokuapp.com/https://dex.binance.org/api/v1/ticker/24hr?symbol=' + symbol;
+
+			fetch(url)
+				.then(response => response.json())
+				.then(data => {
+					document.getElementById('preco').innerHTML = data.lastPrice;
+				})
+				.catch(error => console.error(error));
+		}
+	</script>
+</body>
+</html>
