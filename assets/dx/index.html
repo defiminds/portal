@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Exemplo CORS Anywhere</title>
+	<title>Binance DEX</title>
 </head>
 <body>
 	<select id="symbol-select">
-		<option value="BNBBTC">BNB/BTC</option>
-		<option value="BNBETH">BNB/ETH</option>
-		<option value="BTCUSDSB-1AC">BTC/USDSB-1AC</option>
-		<option value="ETHBTC">ETH/BTC</option>
-		<option value="ETHUSDSB1AC">ETH/USDSB-1AC</option>
+		<option value="BNB_BTC">BNB/BTC</option>
+		<option value="BNB_ETH">BNB/ETH</option>
+		<option value="BTC_USDSB-1AC">BTC/USDSB-1AC</option>
+		<option value="ETH_BTC">ETH/BTC</option>
+		<option value="ETH_USDSB-1AC">ETH/USDSB-1AC</option>
 	</select>
 	<button onclick="buscarPreco()">Buscar Preço</button>
+  <button onclick="listarSymbols()">Listar Symbols</button>
 	<p id="preco"></p>
 
 	<script>
 		function buscarPreco() {
 			const symbol = document.getElementById('symbol-select').value;
 			const url = 'https://defiminds-cors-proxy.glitch.me/?symbol=' + symbol;
+
 			fetch(url)
 				.then(response => response.json())
 				.then(data => {
@@ -25,6 +27,25 @@
 				})
 				.catch(error => console.error(error));
 		}
+
+    function listarSymbols() {
+      const url = 'https://defiminds-cors-proxy.glitch.me/list-symbols';
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const select = document.getElementById('symbol-select');
+          select.innerHTML = '';
+
+          data.forEach(symbol => {
+            const option = document.createElement('option');
+            option.value = symbol.symbol;
+            option.text = symbol.symbol;
+            select.appendChild(option);
+          });
+        })
+        .catch(error => console.error(error));
+    }
 	</script>
 </body>
 </html>
