@@ -17,7 +17,8 @@
 	<script>
 		function buscarPreco() {
 			const symbol = document.getElementById('symbol-select').value;
-			const url = 'https://cors-anywhere.herokuapp.com/https://dex.binance.org/api/v1/ticker/24hr?symbol=' + symbol;
+			const url = 'https://defiminds-cors-proxy.glitch.me/api/v1/ticker/24hr?symbol=' + symbol;
+
 
 			fetch(url)
 				.then(response => response.json())
