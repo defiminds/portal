@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Amount of bitcoin wallet generated</title>
+  </head>
+  <body>
+    <h1>Amount of bitcoin wallet generated</h1>
+    <p id="walletCount">Loading...</p>
+    
+    <script>
+      const url = "https://api.blockchain.info/charts/my-wallet-n-users?timespan=all&format=json";
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const walletCount = data.values[data.values.length - 1].y;
+          document.getElementById("walletCount").innerHTML = `Amount of bitcoin wallet generated: ${walletCount}`;
+        })
+        .catch(error => console.log(error));
+    </script>
+  </body>
+</html>
